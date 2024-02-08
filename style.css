@@ -1,0 +1,31 @@
+.item {
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.item.red {
+    background: red;
+}
+
+.item.blue {
+    background: blue;
+}
+
+.item.purple {
+    background: purple;
+}
+
+.item.green {
+    background: green;
+}
+
+.item.yellow {
+    background: yellow;
+}
+
+.item.orange {
+    background: orange;
+}
