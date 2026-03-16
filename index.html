@@ -5,6 +5,79 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <aside id="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-label">COLORS</div>
+            <div id="color-toggles" class="toggle-grid"></div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-label">DENSITY</div>
+            <div class="btn-group" id="density-btns">
+                <button data-val="20">░</button>
+                <button data-val="40" class="active">▒</button>
+                <button data-val="70">▓</button>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-label">SIZES</div>
+            <div class="btn-group" id="size-btns">
+                <button data-val="uniform" class="active">▬▬▬</button>
+                <button data-val="varied">▬▭▪</button>
+                <button data-val="chaos">▬▪▭▬▪</button>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-label">STYLE</div>
+            <div class="btn-group" id="style-btns">
+                <button data-val="flat" class="active">flat</button>
+                <button data-val="gradient">grad</button>
+                <button data-val="neon">neon</button>
+                <button data-val="pastel">soft</button>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-label">THEME</div>
+            <div class="btn-group" id="theme-btns">
+                <button data-val="dark" class="active">dark</button>
+                <button data-val="light">light</button>
+                <button data-val="amoled">void</button>
+                <button data-val="warm">warm</button>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-label">LAYOUT</div>
+            <div class="btn-group" id="layout-btns">
+                <button data-val="single" class="active">▌</button>
+                <button data-val="wide">▌▌</button>
+                <button data-val="masonry">⊞</button>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-label">SORT</div>
+            <div class="btn-group" id="sort-btns">
+                <button data-val="random" class="active">rand</button>
+                <button data-val="color">color</button>
+                <button data-val="size">size</button>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-label">PURPLE LUCK</div>
+            <div class="luck-row">
+                <input type="range" id="purple-luck" min="1" max="50" value="4">
+                <span id="luck-val">4%</span>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <button id="btn-regen" class="regen-btn">↺ regenerate</button>
+        </div>
+        <div class="sidebar-section stats-section">
+            <div class="sidebar-label">SESSION</div>
+            <div id="stats"></div>
+        </div>
+    </aside>
+
+    <main id="feed"></main>
+
     <script src="script.js"></script>
 </body>
 </html>
