@@ -4,7 +4,7 @@ const ALL_COLORS = ['red','blue','green','yellow','orange','teal','purple','pink
 
 const config = {
     enabled: new Set(ALL_COLORS),
-    density: window.innerWidth < 600 ? 5 : 40,
+    density: window.innerWidth < 768 ? 5 : 40,
     sizes: 'uniform',
     style: 'flat',
     theme: 'dark',
@@ -183,7 +183,7 @@ function buildFeed() {
     feed.className = `layout-${config.layout}`;
     const probs = getProbs();
 
-    let items = Array.from({ length: config.density }, (_, i) => createItem(probs, i));
+    let items = Array.from({ length: Number(config.density) }, (_, i) => createItem(probs, i));
 
     if (config.sort === 'color') {
         items.sort((a, b) => {

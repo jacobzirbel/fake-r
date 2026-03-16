@@ -442,6 +442,7 @@ body.style-pastel .item.lime   { background: #f0fff4; box-shadow: none; }
 }
 
 /* ── Responsive ── */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     main#feed { padding: 64px 16px 60px; }
+    .item, .thread-wrap { width: 90% !important; }
 }
