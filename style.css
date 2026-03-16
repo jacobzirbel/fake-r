@@ -1,31 +1,115 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+    gap: 14px;
+    min-height: 100vh;
+}
+
 .item {
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 5px;
-    width: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: min(420px, 100%);
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform .15s ease, box-shadow .15s ease;
+    animation: fadeSlideIn .3s ease both;
 }
 
-.item.red {
-    background: red;
+.item:hover {
+    transform: translateY(-2px) scale(1.01);
 }
 
-.item.blue {
-    background: blue;
+.item.selected {
+    outline: 3px solid white;
+    outline-offset: 2px;
 }
 
+/* Heights vary for rhythm */
+.item.tall   { height: 100px; }
+.item.medium { height: 68px;  }
+.item.short  { height: 48px;  }
+
+/* ── Colors ── */
+.item.red    { background: linear-gradient(135deg, #ff4500, #ff6b3d); box-shadow: 0 4px 20px rgba(255,69,0,.35); }
+.item.blue   { background: linear-gradient(135deg, #0079d3, #3da8ff); box-shadow: 0 4px 20px rgba(0,121,211,.35); }
+.item.green  { background: linear-gradient(135deg, #16a34a, #22c55e); box-shadow: 0 4px 20px rgba(22,163,74,.35); }
+.item.yellow { background: linear-gradient(135deg, #ca8a04, #fbbf24); box-shadow: 0 4px 20px rgba(202,138,4,.35); }
+.item.orange { background: linear-gradient(135deg, #ea580c, #fb923c); box-shadow: 0 4px 20px rgba(234,88,12,.35); }
+.item.teal   { background: linear-gradient(135deg, #0d9488, #2dd4bf); box-shadow: 0 4px 20px rgba(13,148,136,.35); }
+
+/* ── Purple is special ── */
 .item.purple {
-    background: purple;
+    background: linear-gradient(135deg, #581c87, #9333ea, #c084fc);
+    box-shadow: 0 0 30px rgba(147,51,234,.6), 0 4px 20px rgba(147,51,234,.4);
+    animation: fadeSlideIn .3s ease both, purplePulse 2.5s ease-in-out infinite;
 }
 
-.item.green {
-    background: green;
+.item.purple::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.18) 50%, transparent 70%);
+    animation: shimmer 2.5s ease-in-out infinite;
 }
 
-.item.yellow {
-    background: yellow;
+.item.purple::after {
+    content: '✦';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: rgba(255,255,255,.6);
+    animation: spin 6s linear infinite;
 }
 
-.item.orange {
-    background: orange;
+/* ── Shine on all items on hover ── */
+.item:not(.purple)::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.1) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity .2s;
+}
+.item:not(.purple):hover::before { opacity: 1; }
+
+/* ── Selected state ── */
+.item.selected::after {
+    content: '✓';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: rgba(255,255,255,.9);
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(255,255,255,.5);
+}
+.item.purple.selected::after { content: '✦ ✓'; }
+
+/* ── Keyframes ── */
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes purplePulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(147,51,234,.6), 0 4px 20px rgba(147,51,234,.4); }
+    50%       { box-shadow: 0 0 50px rgba(147,51,234,.9), 0 8px 30px rgba(147,51,234,.6); }
+}
+
+@keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    60%, 100% { transform: translateX(100%); }
+}
+
+@keyframes spin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to   { transform: translateY(-50%) rotate(360deg); }
 }

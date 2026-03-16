@@ -1,41 +1,42 @@
-createDivs();
+const COLORS = ['red', 'blue', 'green', 'yellow', 'orange', 'teal', 'purple'];
+const PROBS  = [0.22,  0.18,  0.20,   0.15,    0.14,    0.07,   0.04];
+const SIZES  = ['tall', 'medium', 'short'];
+const SIZE_PROBS = [0.25, 0.50, 0.25];
+
+function weightedRandom(items, probs) {
+    let r = Math.random(), cum = 0;
+    for (let i = 0; i < items.length; i++) {
+        cum += probs[i];
+        if (r < cum) return items[i];
+    }
+    return items[items.length - 1];
+}
 
 function createDivs() {
     for (let i = 0; i < 40; i++) {
-        const div = document.createElement("div");
-        div.className = "item " + getRandomColor();
+        const div = document.createElement('div');
+        const color = weightedRandom(COLORS, PROBS);
+        const size  = weightedRandom(SIZES, SIZE_PROBS);
+        div.className = `item ${color} ${size}`;
+        div.style.animationDelay = `${i * 30}ms`;
+
+        div.addEventListener('click', () => {
+            div.classList.toggle('selected');
+        });
 
         document.body.appendChild(div);
-
-
-        // assign an onclick event to each div 
-        div.onclick = function() {
-            if (div.className.includes('selected')) {
-                div.className = div.className.replace('selected', '');
-            } else {
-                div.className += ' selected';
-            }
-        };
     }
 }
 
-function getRandomColor() {
-    const colors = ['red', 'blue', 'purple', 'green', 'yellow', 'orange'];
-    const probabilities = [0.2, 0.1, 0.15, 0.3, 0.15, 0.1];
-    const random = Math.random();
-    let cumulativeProbability = 0;
-
-    for (let i = 0; i < colors.length; i++) {
-        cumulativeProbability += probabilities[i];
-        if (random < cumulativeProbability) {
-            return colors[i];
-        }
-    }
-}
-
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', () => {
     if (window.scrollY === 0) {
-        document.body.innerHTML = '';
-        createDivs();
+        document.querySelectorAll('.item').forEach((el, i) => {
+            el.style.animation = 'none';
+            el.style.opacity = '0';
+            setTimeout(() => el.remove(), 200 + i * 20);
+        });
+        setTimeout(createDivs, 200 + 40 * 20 + 100);
     }
 });
+
+createDivs();
