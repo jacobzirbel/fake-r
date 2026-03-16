@@ -4,7 +4,7 @@ const ALL_COLORS = ['red','blue','green','yellow','orange','teal','purple','pink
 
 const config = {
     enabled: new Set(ALL_COLORS),
-    density: window.innerWidth < 600 ? 10 : 40,
+    density: window.innerWidth < 600 ? 5 : 40,
     sizes: 'uniform',
     style: 'flat',
     theme: 'dark',
