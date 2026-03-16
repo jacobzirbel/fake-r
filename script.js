@@ -302,5 +302,13 @@ window.addEventListener('scroll', () => {
     if (window.scrollY === 0) buildFeed();
 });
 
+const sidebarToggle = document.getElementById('sidebar-toggle');
+const sidebar = document.getElementById('sidebar');
+sidebarToggle.addEventListener('click', () => {
+    const open = sidebar.classList.toggle('open');
+    sidebarToggle.classList.toggle('open', open);
+    sidebarToggle.textContent = open ? '✕' : '⚙';
+});
+
 applyTheme('dark');
 buildFeed();
