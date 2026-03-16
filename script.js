@@ -299,7 +299,18 @@ luckSlider.addEventListener('input', () => {
 document.getElementById('btn-regen').addEventListener('click', buildFeed);
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY === 0) buildFeed();
+    if (window.scrollY === 0) {
+        buildFeed();
+        return;
+    }
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 200) {
+        const feed = document.getElementById('feed');
+        const probs = getProbs();
+        const count = Number(config.density);
+        const offset = feed.querySelectorAll('.item:not(.thread-item)').length;
+        Array.from({ length: count }, (_, i) => createItem(probs, offset + i))
+            .forEach(el => feed.appendChild(el));
+    }
 });
 
 const sidebarToggle = document.getElementById('sidebar-toggle');
